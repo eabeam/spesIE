@@ -1,23 +1,17 @@
 /*
-Name: surveydata_full_clean
-Date created: 14-06-2017
-Created by: Guido Maschhaupt
-Description: generates new variables and codes for other, specify variables
-version: STATASE13
+Project: 		Impact Evaluation of the Special Program for Employment of Student (SPES)
+Folder path: 	SPES IE Dataset\dofiles
+File name: 		initialize
 
-Date last modified: 02-04-2018
-Last modified by: HLR
+Impact Evaluation of the Special Program for Employment of Student (SPES)
+Innovations for Poverty Action 
+Code developed by Emily Beam and Heather Richmond
 
-Uses:			surveydata_public.dta 			
-Creates: 		surveydata_full_clean.dta" 
-
+Last Updated: 29 April 2018 by EB
+Stata version 13.1
 */
 
-
-***********
-* STart initiatlize code here
-***********
-
+*** INITIALIZE DATA FOR ANALYSIS ***
 
 use "$usedata_analysis/surveydata_full_initialize.dta", clear
 

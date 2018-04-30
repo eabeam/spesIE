@@ -5,9 +5,6 @@ use "$usedata_analysis/surveydata_full_clean.dta", clear
 
 
 
-set scheme selection
-
-
 * Age
 graph twoway histogram _bb_age if _bb_age > 0 & _bb_age <=25 , color( "71 159 218") lcolor(black) percent discrete xtitle("Age") ytitle("Percent of respondents") xlabel(15(1)25) gap(30)
 	graph export "$figures/_bb_age.png",replace
@@ -113,7 +110,7 @@ graph twoway histogram _eeo_edu_famhelp if _eeo_edu_famhelp < 30000 & edu_level 
 	
 	
 	
-exit
+
 * Median spes payment = XXX
 
 

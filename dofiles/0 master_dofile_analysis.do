@@ -12,7 +12,7 @@ Nathanael Goldberg
 Leigh Linden
 Stella Quimbo 
 
-Code developed by Heather Richmond and Emily Beam 
+Code developed by Emily Beam and Heather Richmond
 
 Last Updated: 29 April 2018 by EB
 Stata version 13.1
@@ -24,8 +24,8 @@ Stata version 13.1
 
 *   [Add your drive/pathway]/SPES IE Dataset"
 
-global path "~/Desktop/TestBox/SPES IE Dataset"
-*global path "X:/Box/IPA_PHL_Projects/SPES_DOLE/SPES IE Dataset"
+*global path "~/Desktop/TestBox/SPES IE Dataset"
+global path "D:\SPES IE Dataset"
 
 * Relative paths 
 global usedata_analysis "$path/usedata"

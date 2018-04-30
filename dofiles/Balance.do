@@ -1,13 +1,18 @@
-/* Generate balance table 
+/*
+Project: 		Impact Evaluation of the Special Program for Employment of Student (SPES)
+Folder path: 	SPES IE Dataset\dofiles
+File name: 		Balance
 
-3ie Response 
+Impact Evaluation of the Special Program for Employment of Student (SPES)
+Innovations for Poverty Action 
+Code developed by Emily Beam and Heather Richmond
 
-Last updated 04 June 2017 by Emily Beam 
-
+Last Updated: 04 June 2017 by EB
+Stata version 13.1
 */ 
 
+*** BALANCE TABLES ***
 
-*use "$usedata_analysis/surveydata_full_clean.dta", clear 
 use "$usedata_analysis/surveydata_for_balance.dta", clear 
 
 

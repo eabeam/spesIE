@@ -1,3 +1,17 @@
+/*
+Project: 		Impact Evaluation of the Special Program for Employment of Student (SPES)
+Folder path: 	SPES IE Dataset\dofiles
+File name: 		regressions_fullsample_Oct2017
+
+Impact Evaluation of the Special Program for Employment of Student (SPES)
+Innovations for Poverty Action 
+Code developed by Emily Beam and Heather Richmond
+
+Last Updated: 29 April 2018 by EB
+Stata version 13.1
+*/
+
+*** IMPACT ANALYSIS ***
 
 use "$usedata_analysis/surveydata_full_clean.dta", clear
 
@@ -136,5 +150,6 @@ recode _bb_expectedtuition . = 0
 recode _bb_othereducationexp . = 0
 
 areg attrit treatment _bb* _f_bb* if randomization != . & endline_contacted == 1,absorb(scel)
+testparm *
 sum endline if endline_contacted
-	outreg2 using "$tables_analysis/attrition.xls", replace title("Attrition") ctitle("`lab'") nocons addtext("Stratification Cell FE", "Yes","Specification","LATE") addstat("Control Group Mean", r(mean)) auto(2) bracket
+	outreg2 using "$tables_analysis/attrition.xls", replace title("Attrition") ctitle("Attrit") nocons addtext("Stratification Cell FE", "Yes","Specification","LATE") addstat("Control Group Mean", r(mean)) auto(2) bracket

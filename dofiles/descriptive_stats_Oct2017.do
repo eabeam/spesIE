@@ -1,5 +1,18 @@
-*** Generating info for endline tables
-* Last updated 20 June by EB ( Corrected attrition tests) 
+/*
+Project: 		Impact Evaluation of the Special Program for Employment of Student (SPES)
+Folder path: 	SPES IE Dataset\dofiles
+File name: 		regressions_het_workreadiness
+
+Impact Evaluation of the Special Program for Employment of Student (SPES)
+Innovations for Poverty Action 
+Code developed by Emily Beam and Heather Richmond
+
+Last Updated: 29 April 2018 by EB
+Stata version 13.1
+*/
+
+*** DESCRIPTIVE STATS ***
+ 
 use "$usedata_analysis/surveydata_full_clean.dta", clear
 
 
@@ -115,15 +128,25 @@ tab _eeo_spes_firstenrolled if randomization == 0
 
 ** Distribution of payment schedules
 * Total
-tab spes_payment_rcvd_employer // copy values
-tab spes_payment_rcvd_dole // copy values
-* Per region
-* Same but conditioned on _bb_region
+tab spes_payment_rcvd_employer 
+tab spes_payment_rcvd_dole 
 
-*** Payment spent on
-replace spes_payment_spent = trim(subinstr(spes_payment_spent,"-222","",.))
+* Per region
+tab spes_payment_rcvd_employer if _bb_region == 1 
+tab spes_payment_rcvd_dole if _bb_region == 1 
+
+tab spes_payment_rcvd_employer if _bb_region == 3
+tab spes_payment_rcvd_dole if _bb_region == 3
+
+tab spes_payment_rcvd_employer if _bb_region == 6 | _bb_region == 7
+tab spes_payment_rcvd_dole if _bb_region == 6 | _bb_region == 7
+
+tab spes_payment_rcvd_employer if _bb_region == 11 
+tab spes_payment_rcvd_dole if _bb_region == 11
+
+*** Payment spent on ******
 count if regexm(spes_payment_spent,"1")
-count if regexm(spes_payment_spent,"2")
+count if (regexm(spes_payment_spent,"2") & regexm(spes_payment_spent,"-222")==0) | spes_payment_spent == "2 -222"
 count if regexm(spes_payment_spent,"3")
 count if regexm(spes_payment_spent,"4")
 count if regexm(spes_payment_spent,"5")
@@ -133,10 +156,9 @@ gen _spes_payment_spent_`i' = regexm(spes_payment_spent,"1")
 replace _spes_payment_spent_`i' = . if spes_payment_spent == ""
 }
 tab spes_payment_spent //for amount of observations
-
-
-
-
+tab spes_payment_spent if regexm(spes_payment_spent,"3") 	// Tab if already spent on education
+count if regexm(spes_payment_spent,"3") & regexm(spes_payment_spent,"1") 	
+count if regexm(spes_payment_spent,"3") & regexm(spes_payment_spent,"4") 	
 *** Descriptive stats edu
 
 
@@ -355,7 +377,7 @@ matrix colname Q = `col'
 
 * Loop
 local rand "& treatment!=."
-local conditions " "if endline ==1" "if randomization==1 & treatment!=." "if randomization==0 & endline==1" "if _NT_edu==0 `rand'" "if _NT_edu==1 `rand'" "if _eeo_spes_before==0 `rand'" "if _eeo_spes_before==1 `rand'""
+local conditions " "if endline ==1" "if randomization==1 & endline == 1 & treatment!=." "if randomization==0 & endline==1" "if _NT_edu==0 & endline == 1 `rand'" "if _NT_edu==1  & endline == 1 `rand'" "if _eeo_spes_before==0  & endline == 1 `rand'" "if _eeo_spes_before==1  & endline == 1 `rand'""
 local variables _eed_4ps _score_ppi_total _eed_pregnant _eed_voterid
 
 local j = 1

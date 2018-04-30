@@ -1,3 +1,16 @@
+/*
+Project: 		Impact Evaluation of the Special Program for Employment of Student (SPES)
+Folder path: 	SPES IE Dataset\dofiles
+File name: 		regressions_het_workreadiness
+
+Impact Evaluation of the Special Program for Employment of Student (SPES)
+Innovations for Poverty Action 
+Code developed by Emily Beam and Heather Richmond
+
+Last Updated: 29 April 2018 by EB
+Stata version 13.1
+*/
+
 *** HETEROGENEITY WORK READINESS***
 
 
