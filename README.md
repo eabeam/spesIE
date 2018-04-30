@@ -1,7 +1,6 @@
 # spesIE
 ## Impact Evaluation of the Special Program for Employment of Students
 
-## readme.txt
 **********************************************
 Impact Evaluation of the Special Program for Employment of Student (SPES)
 
