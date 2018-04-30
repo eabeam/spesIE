@@ -1,15 +1,13 @@
 # spesIE
-Impact Evaluation of the Special Program for Employment of Students
-readme.txt
+## Impact Evaluation of the Special Program for Employment of Students
+
+## readme.txt
 **********************************************
 Impact Evaluation of the Special Program for Employment of Student (SPES)
+
 Innovations for Poverty Action 
 
-PIs:
-Emily Beam 
-Nathanael Goldberg 
-Leigh Linden
-Stella Quimbo 
+PIs: Emily Beam, Nathanael Goldberg, Leigh Linden, Stella Quimbo 
 
 Documents prepared by Heather Richmond and Emily Beam 
 
