@@ -7,14 +7,13 @@ Impact Evaluation of the Special Program for Employment of Student (SPES)
 Innovations for Poverty Action 
 Code developed by Emily Beam and Heather Richmond
 
-Last Updated: 29 April 2018 by EB
+Last Updated: 06 June 2018 by EB
 Stata version 13.1
 */
 
 *** DESCRIPTIVE STATS ***
- 
 use "$usedata_analysis/surveydata_full_clean.dta", clear
-
+version 13.1
 
 ** Attrition 
 
@@ -119,14 +118,9 @@ use "$usedata_analysis/surveydata_full_clean.dta", clear
 
 collapse (count) endline, by(_spes_tasks2)
 gsort -endline
+**********************
+* Table 11 - time to payment, based on region 
 
-use "$usedata_analysis/surveydata_full_clean.dta", clear
-
-** Year first enrolled
-tab _eeo_spes_firstenrolled if randomization == 1
-tab _eeo_spes_firstenrolled if randomization == 0
-
-** Distribution of payment schedules
 * Total
 tab spes_payment_rcvd_employer 
 tab spes_payment_rcvd_dole 
@@ -159,8 +153,10 @@ tab spes_payment_spent //for amount of observations
 tab spes_payment_spent if regexm(spes_payment_spent,"3") 	// Tab if already spent on education
 count if regexm(spes_payment_spent,"3") & regexm(spes_payment_spent,"1") 	
 count if regexm(spes_payment_spent,"3") & regexm(spes_payment_spent,"4") 	
-*** Descriptive stats edu
 
+**************
+*** Descriptive stats edu
+******	Tables 12 & 13
 
 local row ""Currently enrolled" "Graduated college" "Graduated high school" "Expect to graduate college" "Expect to graduate high school" "Grades normalized" "Perc private school" "Amt of tuition" "Amt tuition paid out of pocket" "Total education spending" "Received from family" "Received from fam amt" "Scholarship" "Scholarship amt" "Observations""
 local col ""All" "Experimental" "Non_Experimental" "High school" "College" "First_Time_SPES" "SPES_Baby" "No LGU influence" "LGU influence""
@@ -169,8 +165,8 @@ matrix rowname Q = `row'
 matrix colname Q = `col'
 
 * Loop
-local rand "& treatment!=."
-local conditions " "if endline==1" "if randomization==1 & treatment!=." "if randomization==0 & endline==1" "if _NT_edu==0 `rand'" "if _NT_edu==1 `rand'" "if _eeo_spes_before==0 `rand'" "if _eeo_spes_before==1 `rand'" "if _lgu_influence==0 `rand'" "if _lgu_influence==1 `rand'""
+local rand "& treatment!=. & endline == 1"
+local conditions " "if endline==1" "if randomization==1 & treatment!=. & endline == 1" "if randomization==0 & endline==1" "if _NT_edu==0 `rand'" "if _NT_edu==1 `rand'" "if _eeo_spes_before==0 `rand'" "if _eeo_spes_before==1 `rand'" "if _lgu_influence==0 `rand'" "if _lgu_influence==1 `rand'""
 local variables _eeo_enroll _eeo_grad_col _eeo_grad_hs _eeo_expect_grad_col _eeo_expect_grad_hs _eeo_gwa_norm _eeo_edu_schtype_priv _eeo_edu_tuition _eeo_tuition_paid _eeo_edu_spending _eeo_famassit _eeo_famassist_amt _eeo_tuition_scholarship _eeo_tuit_scholar_total
 local j = 1
 foreach cond in `conditions' {
@@ -332,7 +328,7 @@ matrix colname Q = `col'
 
 * Loop
 local rand "& treatment!=."
-local conditions " "" "if randomization==1 & treatment!=." "if randomization==0 & endline==1" "if treatment==0" "if treatment==1" "if _bb_region==3" "if _bb_region==6| _bb_region==7" "if _bb_region==11" "if _bb_region==1" "if _eeo_spes_before==0" "if _eeo_spes_before==1" "if _eeo_private == 1 `rand'" "if _eeo_private == 0 `rand'" "if _NT_edu == 0   `rand'" "if _NT_edu == 1   `rand'" "
+local conditions " "" "if randomization==1 & treatment!=." "if randomization==0 & endline==1" "if treatment==0" "if treatment==1" "if _bb_region==3" "if _bb_region==6| _bb_region==7" "if _bb_region==11" "if _bb_region==1" "if _eeo_spes_before==0 `rand' " "if _eeo_spes_before==1 `rand'" "if _eeo_private == 1 `rand'" "if _eeo_private == 0 `rand'" "if _NT_edu == 0   `rand'" "if _NT_edu == 1   `rand'" "
 local variables _eeo_enroll _eeo_worknow _eeo_worksummer_any _eeo_workjuldec_any _eeo_jobsearch ///
 _eeo_grad_col _eeo_grad_hs _eeo_expect_grad_col _eeo_expect_grad_hs ///
 _eed_voterid _eed_pregnant _eed_4ps ///

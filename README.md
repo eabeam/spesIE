@@ -33,3 +33,7 @@ This set of data files include the raw data produced from the baseline and endli
 **Packages:**
 
 	 - outreg2 is required to output regression tables
+	
+**Included Data (`usedata`)**
+ 1. `surveydata_full_initialize.dta` : This is the cleaned, merged, baseline and endline data set 
+ 1. `terminal_summary.dta`: Terminal report data needed for Figure 6, final report.
