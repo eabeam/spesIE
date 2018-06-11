@@ -25,7 +25,7 @@ This set of data files include the raw data produced from the baseline and endli
 
 ## Instructions: 
 
-1. Unzip the [surveydata_full_initialize.dta.zip](../usedata/surveydata_full_initialize.dta.zip) in the [usedata](../usedata) folder. 
+1. Unzip the [surveydata_full_initialize.dta.zip](/usedata/surveydata_full_initialize.dta.zip) in the [usedata](/usedata) folder. 
 1. In the master do-file (`0 master_dofile_analysis.do) update the global pathways to reflect your local directories. 
 1. Ensure required packages are installed.
 1. Run the remaining commands within the master do-file to recreate the analysis. Note that [initalize.do](../dofiles/initalize.do) generates surveydata_full_clean.dta, which is the main data file used in regressions. 
