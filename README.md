@@ -1,4 +1,4 @@
-#SPES IE
+# SPES IE
 
 **********************************************
 Impact Evaluation of the Special Program for Employment of Student (SPES)
@@ -23,7 +23,7 @@ This set of data files include the raw data produced from the baseline and endli
 
 **********************************************
 
-##Instructions: 
+## Instructions: 
 
 1.Unzip the [surveydata_full_initialize.dta.zip](../usedata/surveydata_full_initialize.dta.zip) in the [usedata](../usedata) folder. 
 1. In the master do-file (`0 master_dofile_analysis.do) update the global pathways to reflect your local directories. 
@@ -33,13 +33,14 @@ This set of data files include the raw data produced from the baseline and endli
 ## Included Data (`usedata`)
  1. `surveydata_full_initialize.dta` : This is the cleaned, merged, baseline and endline data set 
  1. `terminal_summary.dta`: Terminal report data needed for Figure 6, final report.
- 1. [SPESBenefsandBudget.pdf](../documents/SPES Benfs and Budget.pdf): This is the data for Figure 11, final report. 
+ 1. [SPESBenefsandBudget.pdf](../documents/SPESBenfsandBudget.pdf): This is the data for Figure 11, final report. 
  
-##Packages: 
+## Packages: 
 
  - `outreg2` is required to output regression tables
 
-##Replication Details
+## Replication Details
+
 | Table | Details |Do-files | Output
 |--------|--      |-------| ---|
 | Table 1 | Timeline | N/A | N/A|
