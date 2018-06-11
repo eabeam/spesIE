@@ -6,8 +6,12 @@ Innovations for Poverty Action
 
 PIs:
 Emily Beam 
+
 Nathanael Goldberg 
+
+
 Leigh Linden
+
 Stella Quimbo 
 
 Documents prepared by Heather Richmond and Emily Beam 
@@ -28,12 +32,12 @@ This set of data files include the raw data produced from the baseline and endli
 1. Unzip the [surveydata_full_initialize.dta.zip](/usedata/surveydata_full_initialize.dta.zip) in the [usedata](/usedata) folder. 
 1. In the master do-file (`0 master_dofile_analysis.do) update the global pathways to reflect your local directories. 
 1. Ensure required packages are installed.
-1. Run the remaining commands within the master do-file to recreate the analysis. Note that [initalize.do](../dofiles/initalize.do) generates surveydata_full_clean.dta, which is the main data file used in regressions. 
+1. Run the remaining commands within the master do-file to recreate the analysis. Note that [initalize.do](/dofiles/initalize.do) generates surveydata_full_clean.dta, which is the main data file used in regressions. 
 
 ## Included Data (`usedata`)
  1. `surveydata_full_initialize.dta` : This is the cleaned, merged, baseline and endline data set 
  1. `terminal_summary.dta`: Terminal report data needed for Figure 6, final report.
- 1. [SPESBenefsandBudget.pdf](../documents/SPESBenfsandBudget.pdf): This is the data for Figure 11, final report. 
+ 1. [SPESBenefsandBudget.pdf](/documents/SPESBenfsandBudget.pdf): This is the data for Figure 11, final report. 
  
 ## Packages: 
 
