@@ -1,4 +1,5 @@
-readme.txt
+#SPES IE
+
 **********************************************
 Impact Evaluation of the Special Program for Employment of Student (SPES)
 Innovations for Poverty Action 
@@ -29,10 +30,10 @@ This set of data files include the raw data produced from the baseline and endli
 1. Ensure required packages are installed.
 1. Run the remaining commands within the master do-file to recreate the analysis. Note that [initalize.do](../dofiles/initalize.do) generates surveydata_full_clean.dta, which is the main data file used in regressions. 
 
-## Included Data (`usedata`)**
+## Included Data (`usedata`)
  1. `surveydata_full_initialize.dta` : This is the cleaned, merged, baseline and endline data set 
  1. `terminal_summary.dta`: Terminal report data needed for Figure 6, final report.
- 1. [SPES Benefs and Budget.pdf](../documents/SPES Benfs and Budget.pdf): This is the data for Figure 11, final report. 
+ 1. [SPESBenefsandBudget.pdf](../documents/SPES Benfs and Budget.pdf): This is the data for Figure 11, final report. 
  
 ##Packages: 
 
@@ -49,7 +50,7 @@ This set of data files include the raw data produced from the baseline and endli
 | Table 6 | Reasons for attrition | `descriptive_stats_Oct2017`|`descriptive_stats2.xls/AttritReason`|
 | Table 7 | Endline attrition |`descriptive_stats_Oct2017`|`descriptive_stats2.xls/attrition`|
 | Table 8 | Attrition predictors | `regressions_fullsample_Oct2017`|`attrition.xls`|
-| Table 9 | SPES Take-up |`descriptive_stats_Oct2017`|`descriptive_stats2.xls/Take_up`|`
+| Table 9 | SPES Take-up |`descriptive_stats_Oct2017`|`descriptive_stats2.xls/Take_up`|
 | Table 10 | Distribution of tasks | `descriptive_stats_Oct2017`| Results window|
 | Table 11 | Time to payment | `descriptive_stats_Oct2017.do`|Results window|
 | Table 12 |Educ characteristics, sample type |`descriptive_stats_Oct2017`|`descriptive_stats2.xls/Desc_edu`| 
