@@ -77,7 +77,7 @@ gen nonexp_share = nonexp_n/`r(sum)'
 sum exp_n
 gen exp_share = exp_n/`r(sum)'
 order _eeo_spes_first exp_share nonexp_share exp_n nonexp_n
-export excel using "$figures/figures3-10.xls",sheet("fig5-enrolled") replace firstrow(variables)
+export excel using "$figures/figures5-10.xls",sheet("fig5-enrolled") replace firstrow(variables)
 
 
 **** Figure 6: Distribution of SPES duration, 2016 and 2017 beneficiaries  ************
@@ -92,7 +92,7 @@ collapse (sum) no_2016 no_2017 (mean) total*,by(days_cat)
 gen rate_16 = no_2016/total_16
 gen rate_17 = no_2017/total_17
 
-export excel using "$figures/figures3-10.xls",sheet("fig6-duration") sheetmodify firstrow(variables)
+export excel using "$figures/figures5-10.xls",sheet("fig6-duration") sheetmodify firstrow(variables)
 
 
 **** Figure 7 ************
@@ -120,13 +120,13 @@ merge 1:1 timetopay using `temp1'
 drop _merge
 order timetopay share_emp share_dole n_emp n_dole 
 
-export excel using "$figures/figures3-10.xls",sheet("fig7-timepay") sheetmodify  firstrow(variables)
+export excel using "$figures/figures5-10.xls",sheet("fig7-timepay") sheetmodify  firstrow(variables)
 
 **** Figure 8 ************
 ** How beneficiaries used funds
 
 use "$usedata_analysis/surveydata_full_clean.dta", clear
-putexcel set "$figures/figures3-10.xls", sheet(Fig8-Howspent) modify
+putexcel set "$figures/figures5-10.xls", sheet(Fig8-Howspent) modify
 
 
 putexcel A8 = ("Observations" )
@@ -217,7 +217,7 @@ drop _merge
 
 order satisf share_peso share_overall share_emp
 
-export excel using "$figures/figures3-10.xls",sheet("fig9-satisf") sheetmodify  firstrow(variables)
+export excel using "$figures/figures5-10.xls",sheet("fig9-satisf") sheetmodify  firstrow(variables)
 
 
 
@@ -270,6 +270,6 @@ matrix Q[`i',12]=`se'
 local ++i
 }
 
-putexcel set "$figures/figures3-10.xls", sheet(Fig10-enroll) modify
+putexcel set "$figures/figures5-10.xls", sheet(Fig10-enroll) modify
 putexcel A1=matrix(Q, names)
 

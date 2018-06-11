@@ -15,8 +15,43 @@ Stata version 13.1
 use "$usedata_analysis/surveydata_full_clean.dta", clear
 version 13.1
 
-** Attrition 
+****** Treatment/Control distribution - Table 3
 
+tab region treatment if random
+
+****** Reasons for Attrition - Table 6 
+use "$usedata_analysis/surveydata_full_clean.dta", clear
+keep if endline == 0 
+decode call_record,gen(_attrit_temp)
+tab _eeo_attrition ,sort
+
+gen _eeo_attrit_group = "" 
+	replace _eeo_attrit_group = "Respondent could not be reached" if _attrit_temp == "Answered, not respondent"
+	replace _eeo_attrit_group = "Respondent could not be reached" if _attrit_temp == "Answered, wrong number"
+	replace _eeo_attrit_group = "Respondent could not be reached" if _attrit_temp == "Incorrect number"
+	replace _eeo_attrit_group = "Respondent could not be reached" if _attrit_temp == "No answer, call was busy"
+	replace _eeo_attrit_group = "Respondent could not be reached" if _attrit_temp == "No answer, call was not answered/unattended/out of coverage area"
+	replace _eeo_attrit_group = "Respondent could not be reached" if _attrit_temp == "Respondent cannot be reached, all contacts exhausted"
+	
+	replace _eeo_attrit_group = "Partial interview only" if _attrit_temp == "Interviewed partially"
+	replace _eeo_attrit_group = "Partial interview only" if _attrit_temp == "Partial interview, respondent cannot be reached"
+	
+	replace _eeo_attrit_group = "Refused/hung up"  if _attrit_temp == "Answered, hung up" 
+	replace _eeo_attrit_group = "Refused/hung up"  if _attrit_temp == "Partial interview, respondent refused to continue" 
+	replace _eeo_attrit_group = "Refused/hung up"  if _attrit_temp == "Refused interview" 
+
+
+	replace _eeo_attrit_group = "Interview scheduled, never re-contacted" if _attrit_temp == "Answered, not respondent, scheduled"
+	replace _eeo_attrit_group = "Interview scheduled, never re-contacted" if _attrit_temp == "Interviewed scheduled"
+	
+collapse (count) baseline,by(_eeo_attrit_group) 
+rename baseline N
+export excel using "$tables_analysis/descriptive_stats2.xls", sheet(AttritReason) replace   firstrow(variables)
+
+
+** Attrition - Table 7
+
+use "$usedata_analysis/surveydata_full_clean.dta", clear
 
 ** Set up matrix
 local row ""Baseline respondents" "Attempted to contact" "Response rate" "
@@ -46,10 +81,14 @@ qui test treatment == 0
 matrix P[3,4]=r(p)
 
 * Export to Excel
-putexcel set "$tables_analysis/descriptive_stats2.xls", sheet(Attrition) replace
+putexcel set "$tables_analysis/descriptive_stats2.xls", sheet(Attrition) modify
 putexcel A1=matrix (P, names) 
 *Alt command for Stata 14+
 *putexcel A1=matrix (P), names nformat(##.##) 
+
+
+
+
 
 *** TAKE-UP ***
 
@@ -120,6 +159,7 @@ collapse (count) endline, by(_spes_tasks2)
 gsort -endline
 **********************
 * Table 11 - time to payment, based on region 
+use "$usedata_analysis/surveydata_full_clean.dta", clear
 
 * Total
 tab spes_payment_rcvd_employer 
@@ -396,6 +436,46 @@ foreach cond in `conditions' {
 * Export to Excel
 putexcel set "$tables_analysis/descriptive_stats2.xls", sheet(Desc_other) modify
 putexcel A1=matrix(Q, names)
+
+*** WHY NOT ENROLLED - Table 16 
+
+local row ""Completed studies" "Could not afford" "Care for family" "Hard to meet req" "Already Working" "Changing studies"   "Don't want to" "Pregnancy" "Other" "Observations""
+local col ""All"  "All"  "Control" "Control" "Treatment" "Treatment""
+matrix Q = J(10,6,.)
+matrix rowname Q = `row'
+matrix colname Q = `col'
+
+* Loop
+local rand "& treatment!=."
+local conditions " "if endline == 1"  "if treatment==0 & endline == 1" "if treatment==1 & endline == 1" "
+local variables _edu_no_why_0 _edu_no_why_1 _edu_no_why_2 _edu_no_why_4 _edu_no_why_5  _edu_no_why_8  _edu_no_why_11 _edu_no_why_12 _edu_no_why_22
+local j = 1
+foreach cond in `conditions' {
+	local i = 1
+	foreach var in `variables' {
+		qui summ `var' `cond'
+		matrix Q[`i',`j']=r(mean)
+		matrix Q[`i',`j'+1]=r(sum)
+		local ++i
+	}
+	local ++j
+	local ++j
+}
+* Final row with number of observations
+local i = 2
+foreach cond in `conditions' {
+	 count `cond' & _eeo_enroll == 0
+	matrix Q[10,`i']=r(N)
+	local ++i
+	local ++i
+}
+* Export to Excel
+putexcel set "$tables_analysis/descriptive_stats2.xls", sheet(Why_not_enrolled) modify
+putexcel A1=matrix(Q,names)
+exit
+
+
+
 
 
 **** Call attempts
